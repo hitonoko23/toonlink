@@ -9,7 +9,7 @@ body {
 
 header {
     background-color: #2c5d4f;
-    background-image: url('EmJLBNUUYAAEljX-1.png'); /* パスを修正 */
+    background-image: url('../images/EmJLBNUUYAAEljX-1.png'); /* パスを修正 */
     background-size: cover;
     background-position: center;
     height: 200px; /* ヘッダーの高さを設定 */
