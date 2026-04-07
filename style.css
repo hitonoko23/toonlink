@@ -1,5 +1,4 @@
 :root {
-  --bg: #f4f8ff;
   --panel: #ffffff;
   --accent: #2d6cdf;
   --accent-soft: #e8f0ff;
@@ -7,9 +6,7 @@
   --muted: #5f6b84;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -19,21 +16,14 @@ body {
 }
 
 .container {
-  width: min(980px, 92vw);
+  width: min(1020px, 92vw);
   margin: 2rem auto 3rem;
   display: grid;
   gap: 1rem;
 }
 
-header h1 {
-  margin: 0;
-  font-size: clamp(1.4rem, 2.4vw, 2rem);
-}
-
-header p {
-  margin-top: 0.4rem;
-  color: var(--muted);
-}
+header h1 { margin: 0; font-size: clamp(1.4rem, 2.4vw, 2rem); }
+header p { margin-top: 0.4rem; color: var(--muted); }
 
 .panel {
   background: var(--panel);
@@ -42,15 +32,9 @@ header p {
   box-shadow: 0 10px 30px rgba(25, 40, 70, 0.08);
 }
 
-h2 {
-  margin: 0 0 0.8rem;
-  font-size: 1.1rem;
-}
+h2 { margin: 0 0 0.8rem; font-size: 1.1rem; }
 
-.slider-group {
-  margin-bottom: 0.8rem;
-}
-
+.slider-group { margin-bottom: 0.8rem; }
 .slider-group label {
   display: flex;
   justify-content: space-between;
@@ -58,11 +42,7 @@ h2 {
   font-size: 0.95rem;
   margin-bottom: 0.3rem;
 }
-
-input[type="range"] {
-  width: 100%;
-  accent-color: var(--accent);
-}
+input[type="range"] { width: 100%; accent-color: var(--accent); }
 
 .cards {
   display: grid;
@@ -77,28 +57,68 @@ input[type="range"] {
   background: #fcfdff;
 }
 
-.metric-card h3 {
-  margin: 0;
-  font-size: 0.95rem;
+.highlight-card {
+  border-color: #7aa8ff;
+  background: #f0f6ff;
 }
 
-.value {
-  margin: 0.3rem 0 0.2rem;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--accent);
+.metric-card h3 { margin: 0; font-size: 0.95rem; }
+.value { margin: 0.3rem 0 0.2rem; font-size: 1.35rem; font-weight: 700; color: var(--accent); }
+.formula, .subnote, .legend { margin: 0; font-size: 0.85rem; color: var(--muted); }
+.subnote { margin-top: 0.5rem; }
+
+.fraction-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
 }
 
-.formula,
-.subnote,
-.legend {
-  margin: 0;
+.fraction-card {
+  border: 1px solid #dfe9ff;
+  border-radius: 12px;
+  padding: 0.8rem;
+  background: #fbfdff;
+}
+
+.fraction-card h3 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+
+.fraction {
+  display: grid;
+  text-align: center;
+  gap: 0.15rem;
+}
+
+.fraction .numerator,
+.fraction .denominator {
+  padding: 0.25rem 0.4rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #eef4ff;
+}
+
+.fraction .line {
+  border-top: 2px solid #6c8fd8;
+  margin: 0 0.3rem;
+}
+
+.pbr-card {
+  border-color: #9dbaff;
+  background: #f2f7ff;
+}
+
+.mini-fraction {
+  margin-top: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.85rem;
   color: var(--muted);
 }
 
-.subnote {
-  margin-top: 0.5rem;
+.small .numerator,
+.small .denominator {
+  font-size: 0.82rem;
+  padding: 0.15rem 0.35rem;
 }
 
 .bar-row {
@@ -108,19 +128,13 @@ input[type="range"] {
   gap: 0.8rem;
   margin: 0.7rem 0;
 }
-
-.bar-row span {
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
+.bar-row span { font-size: 0.9rem; font-weight: 600; }
 .bar-bg {
   height: 18px;
   background: var(--accent-soft);
   border-radius: 999px;
   overflow: hidden;
 }
-
 .bar {
   height: 100%;
   width: 0%;

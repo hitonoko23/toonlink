@@ -58,14 +58,63 @@
           <p class="formula">= 株価 ÷ EPS</p>
         </article>
 
-        <article class="metric-card">
-          <h3>PBR</h3>
+        <article class="metric-card highlight-card">
+          <h3>PBR（追加強調）</h3>
           <p class="value" id="pbr"></p>
-          <p class="formula">= 株価 ÷ BPS</p>
+          <p class="formula">= 株価 ÷ BPS（BPS = 自己資本 ÷ 発行済株式数）</p>
         </article>
       </div>
       <p class="subnote" id="bpsNote"></p>
       <p class="subnote" id="relationNote"></p>
+    </section>
+
+    <section class="panel structure">
+      <h2>分子・分母の配置（直感理解）</h2>
+      <div class="fraction-grid">
+        <article class="fraction-card">
+          <h3>ROE</h3>
+          <div class="fraction">
+            <div class="numerator" id="fRoeNum"></div>
+            <div class="line"></div>
+            <div class="denominator" id="fRoeDen"></div>
+          </div>
+        </article>
+
+        <article class="fraction-card">
+          <h3>EPS</h3>
+          <div class="fraction">
+            <div class="numerator" id="fEpsNum"></div>
+            <div class="line"></div>
+            <div class="denominator" id="fEpsDen"></div>
+          </div>
+        </article>
+
+        <article class="fraction-card">
+          <h3>PER</h3>
+          <div class="fraction">
+            <div class="numerator" id="fPerNum"></div>
+            <div class="line"></div>
+            <div class="denominator" id="fPerDen"></div>
+          </div>
+        </article>
+
+        <article class="fraction-card pbr-card">
+          <h3>PBR</h3>
+          <div class="fraction">
+            <div class="numerator" id="fPbrNum"></div>
+            <div class="line"></div>
+            <div class="denominator" id="fPbrDen"></div>
+          </div>
+          <div class="mini-fraction">
+            <span>BPS = </span>
+            <div class="fraction small">
+              <div class="numerator" id="fBpsNum"></div>
+              <div class="line"></div>
+              <div class="denominator" id="fBpsDen"></div>
+            </div>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="panel chart-panel">
