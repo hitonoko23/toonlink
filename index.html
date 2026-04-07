@@ -10,27 +10,23 @@
   <main class="container">
     <header>
       <h1>財務指標ビジュアライザー</h1>
-      <p>スライダーを動かして、<strong>ROE・EPS・PER・PBR</strong>のつながりを直感的に理解できます。</p>
+      <p>スライダーを動かして、<strong>ROE・EPS・PER・PBR・BPS</strong>のつながりを直感的に理解できます。</p>
     </header>
 
     <section class="panel controls">
       <h2>入力（仮定値）</h2>
-
       <div class="slider-group">
         <label for="netIncome">当期純利益（百万円）: <span id="netIncomeValue"></span></label>
         <input id="netIncome" type="range" min="-2000" max="8000" step="100" value="1200">
       </div>
-
       <div class="slider-group">
         <label for="equity">自己資本（百万円）: <span id="equityValue"></span></label>
         <input id="equity" type="range" min="500" max="20000" step="100" value="8000">
       </div>
-
       <div class="slider-group">
         <label for="shares">発行済株式数（百万株）: <span id="sharesValue"></span></label>
         <input id="shares" type="range" min="10" max="1000" step="5" value="120">
       </div>
-
       <div class="slider-group">
         <label for="price">株価（円）: <span id="priceValue"></span></label>
         <input id="price" type="range" min="100" max="10000" step="10" value="1800">
@@ -45,95 +41,48 @@
           <p class="value" id="roe"></p>
           <p class="formula">= 当期純利益 ÷ 自己資本</p>
         </article>
-
         <article class="metric-card">
           <h3>EPS</h3>
           <p class="value" id="eps"></p>
           <p class="formula">= 当期純利益 ÷ 発行済株式数</p>
         </article>
-
+        <article class="metric-card">
+          <h3>BPS（追加）</h3>
+          <p class="value" id="bps"></p>
+          <p class="formula">= 自己資本 ÷ 発行済株式数</p>
+        </article>
         <article class="metric-card">
           <h3>PER</h3>
           <p class="value" id="per"></p>
           <p class="formula">= 株価 ÷ EPS</p>
         </article>
-
-        <article class="metric-card highlight-card">
-          <h3>PBR（追加強調）</h3>
+        <article class="metric-card">
+          <h3>PBR</h3>
           <p class="value" id="pbr"></p>
-          <p class="formula">= 株価 ÷ BPS（BPS = 自己資本 ÷ 発行済株式数）</p>
+          <p class="formula">= 株価 ÷ BPS</p>
         </article>
       </div>
-      <p class="subnote" id="bpsNote"></p>
       <p class="subnote" id="relationNote"></p>
     </section>
 
     <section class="panel structure">
       <h2>分子・分母の配置（直感理解）</h2>
       <div class="fraction-grid">
-        <article class="fraction-card">
-          <h3>ROE</h3>
-          <div class="fraction">
-            <div class="numerator" id="fRoeNum"></div>
-            <div class="line"></div>
-            <div class="denominator" id="fRoeDen"></div>
-          </div>
-        </article>
-
-        <article class="fraction-card">
-          <h3>EPS</h3>
-          <div class="fraction">
-            <div class="numerator" id="fEpsNum"></div>
-            <div class="line"></div>
-            <div class="denominator" id="fEpsDen"></div>
-          </div>
-        </article>
-
-        <article class="fraction-card">
-          <h3>PER</h3>
-          <div class="fraction">
-            <div class="numerator" id="fPerNum"></div>
-            <div class="line"></div>
-            <div class="denominator" id="fPerDen"></div>
-          </div>
-        </article>
-
-        <article class="fraction-card pbr-card">
-          <h3>PBR</h3>
-          <div class="fraction">
-            <div class="numerator" id="fPbrNum"></div>
-            <div class="line"></div>
-            <div class="denominator" id="fPbrDen"></div>
-          </div>
-          <div class="mini-fraction">
-            <span>BPS = </span>
-            <div class="fraction small">
-              <div class="numerator" id="fBpsNum"></div>
-              <div class="line"></div>
-              <div class="denominator" id="fBpsDen"></div>
-            </div>
-          </div>
-        </article>
+        <article class="fraction-card"><h3>ROE</h3><div class="fraction"><div class="numerator" id="fRoeNum"></div><div class="line"></div><div class="denominator" id="fRoeDen"></div></div></article>
+        <article class="fraction-card"><h3>EPS</h3><div class="fraction"><div class="numerator" id="fEpsNum"></div><div class="line"></div><div class="denominator" id="fEpsDen"></div></div></article>
+        <article class="fraction-card"><h3>BPS</h3><div class="fraction"><div class="numerator" id="fBpsNum"></div><div class="line"></div><div class="denominator" id="fBpsDen"></div></div></article>
+        <article class="fraction-card"><h3>PER</h3><div class="fraction"><div class="numerator" id="fPerNum"></div><div class="line"></div><div class="denominator" id="fPerDen"></div></div></article>
+        <article class="fraction-card"><h3>PBR</h3><div class="fraction"><div class="numerator" id="fPbrNum"></div><div class="line"></div><div class="denominator" id="fPbrDen"></div></div></article>
       </div>
     </section>
 
     <section class="panel chart-panel">
-      <h2>見える化チャート（相対比較）</h2>
-      <div class="bar-row">
-        <span>ROE</span>
-        <div class="bar-bg"><div id="barRoe" class="bar"></div></div>
-      </div>
-      <div class="bar-row">
-        <span>PER</span>
-        <div class="bar-bg"><div id="barPer" class="bar"></div></div>
-      </div>
-      <div class="bar-row">
-        <span>PBR</span>
-        <div class="bar-bg"><div id="barPbr" class="bar"></div></div>
-      </div>
-      <div class="legend">
-        ※ 一般的な目安に基づく相対スケール（ROE:20%、PER:30倍、PBR:5倍を100%）
-      </div>
+      <h2>見える化チャート（動きやすい比率表示）</h2>
+      <div class="bar-row"><span>ROE</span><div class="bar-bg"><div id="barRoe" class="bar"></div></div></div>
+      <div class="bar-row"><span>PER</span><div class="bar-bg"><div id="barPer" class="bar"></div></div></div>
+      <div class="bar-row"><span>PBR</span><div class="bar-bg"><div id="barPbr" class="bar"></div></div></div>
+      <div class="bar-row"><span>BPS</span><div class="bar-bg"><div id="barBps" class="bar"></div></div></div>
+      <div class="legend">※ バー幅 = 値 ÷ (値 + 基準値) で計算。小さい変化でも動きが見えやすいスケールです。</div>
     </section>
   </main>
 

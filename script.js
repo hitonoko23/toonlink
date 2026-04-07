@@ -9,13 +9,14 @@ const els = {
   priceValue: document.getElementById("priceValue"),
   roe: document.getElementById("roe"),
   eps: document.getElementById("eps"),
+  bps: document.getElementById("bps"),
   per: document.getElementById("per"),
   pbr: document.getElementById("pbr"),
-  bpsNote: document.getElementById("bpsNote"),
   relationNote: document.getElementById("relationNote"),
   barRoe: document.getElementById("barRoe"),
   barPer: document.getElementById("barPer"),
   barPbr: document.getElementById("barPbr"),
+  barBps: document.getElementById("barBps"),
   fRoeNum: document.getElementById("fRoeNum"),
   fRoeDen: document.getElementById("fRoeDen"),
   fEpsNum: document.getElementById("fEpsNum"),
@@ -29,19 +30,15 @@ const els = {
 };
 
 const fmt = new Intl.NumberFormat("ja-JP", { maximumFractionDigits: 2 });
-
 const yen = (value) => `${fmt.format(value)}円`;
 const pct = (value) => `${fmt.format(value)}%`;
-
-function setText(target, text) {
-  if (target) target.textContent = text;
-}
+const setText = (target, text) => target && (target.textContent = text);
 
 function update() {
-  const netIncome = Number(els.netIncome.value); // 百万円
-  const equity = Number(els.equity.value); // 百万円
-  const shares = Number(els.shares.value); // 百万株
-  const price = Number(els.price.value); // 円
+  const netIncome = Number(els.netIncome.value);
+  const equity = Number(els.equity.value);
+  const shares = Number(els.shares.value);
+  const price = Number(els.price.value);
 
   setText(els.netIncomeValue, fmt.format(netIncome));
   setText(els.equityValue, fmt.format(equity));
@@ -56,13 +53,9 @@ function update() {
 
   setText(els.roe, Number.isFinite(roe) ? pct(roe) : "-");
   setText(els.eps, Number.isFinite(eps) ? yen(eps) : "-");
+  setText(els.bps, Number.isFinite(bps) ? yen(bps) : "-");
   setText(els.per, Number.isFinite(per) ? `${fmt.format(per)}倍` : "N/A（EPSが0以下）");
   setText(els.pbr, Number.isFinite(pbr) ? `${fmt.format(pbr)}倍` : "N/A");
-
-  setText(
-    els.bpsNote,
-    Number.isFinite(bps) ? `BPS（1株当たり純資産）= ${fmt.format(bps)}円` : "BPSを計算できません"
-  );
 
   const derivedPbr = Number.isFinite(per) ? per * (roe / 100) : NaN;
   setText(
@@ -76,28 +69,27 @@ function update() {
   setText(els.fRoeDen, `自己資本 ${fmt.format(equity)} 百万円`);
   setText(els.fEpsNum, `当期純利益 ${fmt.format(netIncome)} 百万円`);
   setText(els.fEpsDen, `発行済株式数 ${fmt.format(shares)} 百万株`);
+  setText(els.fBpsNum, `自己資本 ${fmt.format(equity)} 百万円`);
+  setText(els.fBpsDen, `発行済株式数 ${fmt.format(shares)} 百万株`);
   setText(els.fPerNum, `株価 ${yen(price)}`);
   setText(els.fPerDen, Number.isFinite(eps) ? `EPS ${yen(eps)}` : "EPS -");
   setText(els.fPbrNum, `株価 ${yen(price)}`);
   setText(els.fPbrDen, Number.isFinite(bps) ? `BPS ${yen(bps)}` : "BPS -");
-  setText(els.fBpsNum, `自己資本 ${fmt.format(equity)} 百万円`);
-  setText(els.fBpsDen, `発行済株式数 ${fmt.format(shares)} 百万株`);
 
-  setBar(els.barRoe, roe, 20);
-  setBar(els.barPer, per, 30);
-  setBar(els.barPbr, pbr, 5);
+  setResponsiveBar(els.barRoe, roe, 8);
+  setResponsiveBar(els.barPer, per, 12);
+  setResponsiveBar(els.barPbr, pbr, 1.2);
+  setResponsiveBar(els.barBps, bps, 100);
 }
 
-function setBar(el, value, benchmark) {
+function setResponsiveBar(el, value, pivot) {
   if (!Number.isFinite(value) || value < 0) {
     el.style.width = "0%";
     return;
   }
-  el.style.width = `${Math.min((value / benchmark) * 100, 100)}%`;
+  const width = (value / (value + pivot)) * 100;
+  el.style.width = `${Math.min(width, 100)}%`;
 }
 
-[els.netIncome, els.equity, els.shares, els.price].forEach((input) => {
-  input.addEventListener("input", update);
-});
-
+[els.netIncome, els.equity, els.shares, els.price].forEach((input) => input.addEventListener("input", update));
 update();
